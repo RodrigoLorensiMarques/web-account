@@ -1,8 +1,10 @@
+import FormRegister from "../components/formRegister/formRegister";
+
 function Register() {
     
     return (
-        <div>
-            <p>Cadastro</p>
+        <div className='w-lg '>
+            <FormRegister />
         </div>
     )
 

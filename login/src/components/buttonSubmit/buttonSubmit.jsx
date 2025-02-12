@@ -1,10 +1,11 @@
-function ButtonSubmit({type, title}) {
+function ButtonSubmit({type, title, icon}) {
     
     return (
         <button
-            className="border rounded-md p-2 w-full mt-8 font-bold bg-red-400"
+            className=" rounded-md p-3 w-full font-bold bg-[#1283fe] text-[#ffffff] cursor-pointer hover:bg-sky-500 duration-300 outline-none"
             type={type}>
             {title}
+            <span className="ml-2">{icon}</span>
         </button>
     )
 }
