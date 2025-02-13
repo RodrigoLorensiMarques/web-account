@@ -1,4 +1,4 @@
-function InputForm({type, placeholder, icon}) {
+function InputForm({type, placeholder, icon, onChange, value}) {
     
     return (
         <div className="relative w-full">
@@ -6,6 +6,8 @@ function InputForm({type, placeholder, icon}) {
             
             <input
                 type={type}
+                onChange={onChange}
+                value={value}
                 placeholder={placeholder}
                 className="border rounded-md p-3 pl-10 mb-5 border-[#D4D6DF]  w-full text-[#18204D]  duration-300  focus:outline-[#1283fe]"
                 maxLength={30}
