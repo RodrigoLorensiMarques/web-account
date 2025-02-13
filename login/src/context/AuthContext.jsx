@@ -1,12 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 import { loginApi } from "../services/api";
+import {jwtDecode} from "jwt-decode";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         const token = localStorage.getItem("token");
-        return token ? { token } : null;
+        const decoded = jwtDecode(token);
+
+        return token ? { token, userData:decoded} : null;
     });
 
     const login = async (username, password) => {
@@ -14,14 +17,17 @@ export const AuthProvider = ({ children }) => {
             const response = await loginApi(username, password);
             const { token } = response;
             localStorage.setItem("token", token);
-            setUser({ token });
 
+            const decoded = jwtDecode(token);
+
+            setUser({ token, userData:decoded });
+            
         } catch (error) {
             console.error(error);
         }
     };
 
-    const logOff = () => {
+    const logOut = () => {
         localStorage.clear(user)
     }
 
@@ -29,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     }, [user]);
 
     return (
-        <AuthContext.Provider value={{ user, login, logOff }}>
+        <AuthContext.Provider value={{ user, login, logOut }}>
             {children}
         </AuthContext.Provider>
     );
