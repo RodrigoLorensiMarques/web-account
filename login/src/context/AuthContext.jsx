@@ -21,12 +21,15 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const logOff = () => {
+        localStorage.clear(user)
+    }
 
     useEffect(() => {
     }, [user]);
 
     return (
-        <AuthContext.Provider value={{ user, login }}>
+        <AuthContext.Provider value={{ user, login, logOff }}>
             {children}
         </AuthContext.Provider>
     );
