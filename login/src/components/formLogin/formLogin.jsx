@@ -18,7 +18,7 @@ function FormLogin() {
 
         try {
             await login(username, password);
-            navigate("/home");
+            navigate("/login");
         } catch (error) {
             setError(error);
         }
@@ -41,7 +41,7 @@ function FormLogin() {
                 <Link to={"/"} className="font-bold text-[#0B0F13] outline-none">Esqueci minha senha</Link>
 
                 <div className="mt-8">
-                    <ButtonSubmit type={"submit"} title={"Acessar"} icon={<i className="fa-solid fa-chevron-right"></i>} />
+                    <ButtonSubmit type={"submit"} title={"Acessar"} bgColor={"#1283fe"} color={"#ffff"} bgHover={"sky-500"} icon={<i className="fa-solid fa-chevron-right"></i>} />
                     
                 </div>
             </div>

@@ -13,7 +13,7 @@ function Home() {
     const handleLogOut = async () => {
         try {
             await logOut()
-            navigate("/");
+            navigate("/login");
         } catch (error) {
             throw new Error(error);
         }

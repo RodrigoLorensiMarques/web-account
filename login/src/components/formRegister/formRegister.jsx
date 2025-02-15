@@ -27,7 +27,7 @@ function FormRegister() {
                     </div>
 
                     <div>
-                        <ButtonSubmit title={"Ciar conta"}/>
+                        <ButtonSubmit title={"Ciar conta"} bgColor={"#1283fe"} color={"#ffff"}/>
                     </div>
                 </div>
             
