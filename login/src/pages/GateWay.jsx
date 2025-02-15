@@ -21,14 +21,12 @@ function GateWay() {
                     title={"Criar uma conta"}
                     bgColor={"#ffff"}
                     color={"#626f7c"}
-                    bgHover={"gray-100"}
                 />
                 <ButtonSubmit
                     onClick={ () => navigate("/login")}
                     title={"Já tenho uma conta"}
                     bgColor={"#D4D6DF"}
                     color={"#626f7c"}
-                    bgHover={"gray-200"}
                 />
             </div>
         </div>

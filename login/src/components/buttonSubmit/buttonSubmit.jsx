@@ -1,8 +1,12 @@
-function ButtonSubmit({type, title, icon, bgColor, color, bgHover, onClick}) {
+function ButtonSubmit({type, title, icon, bgColor, color, onClick}) {
+    const style = {
+        backgroundColor: bgColor,
+        color: color,
+    };
     
     return (
-        <button
-            className={` rounded-md p-3 w-full font-bold bg-[${bgColor}] text-[${color}] cursor-pointer hover:bg-${bgHover} duration-300 outline-none`}
+        <button style={style}
+            className={` rounded-md p-3 w-full font-bold cursor-pointer hover:opacity-80 duration-300 outline-none`}
             onClick={onClick}
             type={type}>
             {title}
