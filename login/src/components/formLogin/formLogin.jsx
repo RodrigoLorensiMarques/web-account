@@ -18,7 +18,7 @@ function FormLogin() {
 
         try {
             await login(username, password);
-            navigate("/login");
+            navigate("/home");
         } catch (error) {
             setError(error);
         }

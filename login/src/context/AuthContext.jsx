@@ -7,15 +7,27 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         const token = localStorage.getItem("token");
-        const decoded = jwtDecode(token);
 
-        return token ? { token, userData:decoded} : null;
+        if (!token)
+            return null;
+
+        try {
+            const decoded = jwtDecode(token);
+            return token ? { token, userData:decoded} : null;
+        } catch (error) {
+            return null;
+        }
+        
     });
 
     const login = async (username, password) => {
         try {
             const response = await loginApi(username, password);
             const { token } = response;
+
+            if (!token)
+                throw new Error("Token inválido");
+
             localStorage.setItem("token", token);
 
             const decoded = jwtDecode(token);
