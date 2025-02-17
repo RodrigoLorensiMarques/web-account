@@ -22,16 +22,12 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
-
             const response = await loginApi(username, password);
 
-
-            if (response.status != 200) {
+            if (response.status !== 200) 
                 return response.status
-            }
-
-
-            const { token } = response;
+        
+            const { token } = response.data;
 
             localStorage.setItem("token", token);
             const decoded = jwtDecode(token);

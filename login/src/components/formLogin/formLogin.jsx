@@ -23,7 +23,8 @@ function FormLogin() {
                 setUserInvalid(true);
                 return
             }
-                 
+
+            setUserInvalid(false);
             navigate("/home");
 
         } catch (error) {
@@ -52,7 +53,8 @@ function FormLogin() {
 
                 <div className="mt-8 text-center" >
                     <ButtonSubmit type={"submit"} title={"Acessar"} bgColor={"#1283fe"} color={"#ffff"}  icon={<i className="fa-solid fa-chevron-right"></i>} />
-                    {errors?.username?.type === 'required' && <p className="mt-5 text-red-500">Preencha todos os campos</p>}
+                    {(errors?.username?.type === 'required' || errors?.password?.type === 'required') && <p className="mt-5 text-red-500">Preencha todos os campos</p>}
+                    {userInvalid === true ? <p className="mt-5 text-red-500">Credenciais incorretas ou usuário inválido</p>: null}
                 </div>
             </div>
 

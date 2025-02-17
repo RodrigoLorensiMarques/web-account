@@ -9,13 +9,11 @@ export const loginApi = async (name,password) => {
             name,
             password,
         });
-        console.log("log:",response);
-        return response.data;
+        return response;
 
     } catch (error) {
-        console.log(error);
+
         if (error.message) {
-            console.log("Error.message")
             return error.response;
         }
 
