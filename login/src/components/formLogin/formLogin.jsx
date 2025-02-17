@@ -1,31 +1,41 @@
 import InputForm from "../inputForm/inputForm";
 import ButtonSubmit from "../buttonSubmit/buttonSubmit";
 import { Link } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function FormLogin() {
-    
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [userInvalid, setUserInvalid] = useState(false);
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    
+    const handleLogin = async (data) => {
         try {
-            await login(username, password);
+            const response = await login(data.username, data.password);
+
+            if (response === 400)
+            {
+                setUserInvalid(true);
+                return
+            }
+                 
             navigate("/home");
+
         } catch (error) {
             setError(error);
         }
     };
+    useEffect(() => {
+    }, [userInvalid]);
+
 
     return (
-        <form onSubmit={handleLogin} className="bg-[#ffffff] rounded-3xl">
+        <form  onSubmit={handleSubmit(handleLogin)} className="bg-[#ffffff] rounded-3xl">
             
             <div className="p-9">
                 <h1
@@ -34,15 +44,15 @@ function FormLogin() {
                 </h1>
                 
                 <div className="flex flex-col">
-                    <InputForm type={"text"} placeholder={"Usuário"} icon={<i className="fa-solid fa-user"></i>} value={username} onChange={(e) => setUserName(e.target.value)}/>
-                    <InputForm type={"password"} placeholder={"Senha"} icon={<i className="fa-solid fa-lock"></i>} value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <InputForm type={"text"}  placeholder={"Usuário"} icon={<i className="fa-solid fa-user"></i>} hasError={!!errors.username} {...register("username", { required: true })} />
+                    <InputForm type={"password"} placeholder={"Senha"} icon={<i className="fa-solid fa-lock"></i>} hasError={!!errors.password} {...register("password", {required:true})}/>
                 </div>
 
                 <Link to={"/"} className="font-bold text-[#0B0F13] outline-none">Esqueci minha senha</Link>
 
-                <div className="mt-8">
-                    <ButtonSubmit type={"submit"} title={"Acessar"} bgColor={"#1283fe"} color={"#ffff"} bgHover={"sky-500"} icon={<i className="fa-solid fa-chevron-right"></i>} />
-                    
+                <div className="mt-8 text-center" >
+                    <ButtonSubmit type={"submit"} title={"Acessar"} bgColor={"#1283fe"} color={"#ffff"}  icon={<i className="fa-solid fa-chevron-right"></i>} />
+                    {errors?.username?.type === 'required' && <p className="mt-5 text-red-500">Preencha todos os campos</p>}
                 </div>
             </div>
 

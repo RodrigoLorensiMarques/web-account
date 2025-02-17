@@ -22,17 +22,20 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
+
             const response = await loginApi(username, password);
+
+
+            if (response.status != 200) {
+                return response.status
+            }
+
+
             const { token } = response;
 
-            if (!token)
-                throw new Error("Token inválido");
-
             localStorage.setItem("token", token);
-
             const decoded = jwtDecode(token);
-
-            setUser({ token, userData:decoded });
+            setUser({ token, userData: decoded });
             
         } catch (error) {
             console.error(error);
