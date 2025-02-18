@@ -4,35 +4,36 @@ import {registerUser} from "../../services/api"
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import RegisteredModal from "../registeredModal/registeredModal";
 
 
 function FormRegister() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [userUnavailable, setUserUnavailable] = useState(false);
+    const [registeredModal, setRegisteredModal] = useState(false);
 
     const handleRegister = async (dados) => {
         try {
-            console.log(dados)
             const response = await registerUser(dados);
 
-            console.log(response);
-
-            if (response.status != 200)
-                setUserUnavailable(true);
-
-            else
+            if (response.status === 200) {
+                setRegisteredModal(true);
                 setUserUnavailable(false);
-
-
+            }
+                
+            else
+                setUserUnavailable(true)
+        
         } catch (error) {
             console.error(error);
         }
     }
     useEffect(() => {
-    }, [userUnavailable]);
+    }, [userUnavailable, registeredModal]);
 
     return (
+        <>
         <form onSubmit={handleSubmit(handleRegister)} className="bg-[#ffffff] rounded-3xl">
             
             <div className=" p-9">
@@ -63,6 +64,10 @@ function FormRegister() {
                 <p className="text-[#0B0F13]">Já tem uma conta? <Link to={"/"} className="font-bold text-[#1283fe] outline-none">Faça o login<i className="fa-solid fa-chevron-right"></i> </Link></p>
             </div>
         </form>
+
+            <RegisteredModal isOpen={ registeredModal}  />
+
+        </>    
     )
 }
 
