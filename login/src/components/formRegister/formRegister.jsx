@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import RegisteredModal from "../registeredModal/registeredModal";
+import '../../styles/animation/style.css'
 
 
 function FormRegister() {
@@ -34,7 +35,7 @@ function FormRegister() {
 
     return (
         <>
-        <form onSubmit={handleSubmit(handleRegister)} className="bg-[#ffffff] rounded-3xl">
+        <form onSubmit={handleSubmit(handleRegister)} className="bg-[#ffffff] rounded-3xl animate-move-up">
             
             <div className=" p-9">
                 <h1
@@ -50,18 +51,18 @@ function FormRegister() {
                 
                     <InputForm placeholder={"Nome de Usuário"} icon={<i className="fa-solid fa-at"></i>} {...register("name", { required: true })} hasError={!!errors.name }/>
                     <InputForm placeholder={"E-mail"} icon={<i className="fa-solid fa-envelope"></i>} {...register("email", { required: true })} hasError={!!errors.email }/>
-                <InputForm placeholder={"Senha"} type={"password"} icon={<i className="fa-solid fa-lock"></i>} {...register("password", { required: true })} hasError={!!errors.password }/>
+                <InputForm placeholder={"Senha"} type={"password"} isPassword={true} icon={<i className="fa-solid fa-lock"></i>} {...register("password", { required: true })} hasError={!!errors.password }/>
                 </div>
 
                 <div className="text-center">
                     <ButtonSubmit type={"submit"} title={"Ciar conta"} bgColor={"#1283fe"} color={"#ffff"}/>
-                {(errors?.name?.type === 'required' || errors?.password?.type === 'required' || errors?.firstName?.type === 'required'|| errors?.lastName?.type === 'required' || errors?.email?.type === 'required') && <p className="mt-5 text-red-500">Preencha todos os campos</p>}
-                {userUnavailable === true ? <p className="mt-5 text-red-500">Usuário Indisponível</p>: null}
+                {(errors?.name?.type === 'required' || errors?.password?.type === 'required' || errors?.firstName?.type === 'required'|| errors?.lastName?.type === 'required' || errors?.email?.type === 'required') && <p className="mt-5 text-red-500 animate-move-up">Preencha todos os campos</p>}
+                {userUnavailable === true ? <p className="mt-5 text-red-500 animate-move-up">Usuário Indisponível</p>: null}
                 </div>
             </div>
         
             <div className="w-full  bg-[#f5f7ff] p-7 text-center rounded-b-3xl">
-                <p className="text-[#0B0F13]">Já tem uma conta? <Link to={"/"} className="font-bold text-[#1283fe] outline-none">Faça o login<i className="fa-solid fa-chevron-right"></i> </Link></p>
+                <p className="text-[#0B0F13]">Já tem uma conta? <Link to={"/login"} className="font-bold text-[#1283fe] outline-none">Faça o login<i className="fa-solid fa-chevron-right"></i> </Link></p>
             </div>
         </form>
 

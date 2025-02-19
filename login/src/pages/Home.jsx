@@ -2,7 +2,7 @@ import {useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import ButtonSignOut from "../components/buttonSignOut/buttonSignOut";
 import { useNavigate } from "react-router-dom";
-
+import '../styles/animation/style.css'
 
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
     return (
         <>
             <div>
-                <h1 className="text-[#ffff] text-6xl">Olá, {user.userData.first_name}</h1>
+                <h1 className="text-[#ffff] text-6xl animate-move-up">Olá, {user.userData.first_name}</h1>
             </div>
 
             <div className="fixed justify-center bottom-0 left-1/2 transform -translate-x-1/2 mb-10 text-center ">

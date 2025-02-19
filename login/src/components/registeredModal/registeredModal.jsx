@@ -1,5 +1,6 @@
 import ButtonSubmit from "../buttonSubmit/buttonSubmit"
 import { useNavigate } from "react-router-dom";
+import '../../styles/animation/style.css'
 
 
 function RegisteredModal({ isOpen }) {
@@ -8,7 +9,7 @@ function RegisteredModal({ isOpen }) {
     if (isOpen===true) {
         return (
             <div className="fixed top-0 bottom-0 right-0 left-0 bg-stone-500/50 z-1000">
-                <div className=" bg-[#ffffff] fixed align-center top-1/3  left-1/2  -translate-x-1/2 -translate-y-1/2  p-9 rounded-3xl w-xl">
+                <div className=" bg-[#ffffff] fixed align-center top-1/3  left-1/2  -translate-x-1/2 -translate-y-1/2  p-9 rounded-3xl w-xl animate-move-up">
                     
                     <div className="text-8xl text-center text-emerald-500">
                         <i className="fa-solid fa-circle-check"></i>
