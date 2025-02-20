@@ -6,7 +6,7 @@ Interface para  login e criação de conta de usuário.
 - React.js
 - React Hook Form
 - React Context API
-- Jwd Decode
+- Jwt Decode
 - Tailwind
 
 
